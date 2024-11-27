@@ -17,7 +17,7 @@ next:
 
 The Erlang distribution protocol allows multiple VM instances to form a cluster, capable of running distributed applications. Processes can access resources across all nodes, transparently or through RPC, so if one node in a cluster is compromised, all nodes are. This also means the distribution protocol itself is extremely powerful, and it is absolutely essential to ensure that malicious users cannot gain access to it.
 
-The distribution protocol is started by assigning a node name to a VM at startup, either through [command line arguments](https://erlang.org/doc/man/erl.html#flags) or in the 'vm.args' file of a release. It may also be started at runtime through the [net_kernel:start/1](https://erlang.org/doc/man/net_kernel.html#start-1) function.
+The distribution protocol is started by assigning a node name to a VM at startup, either through [command line arguments](https://www.erlang.org/doc/apps/erts/erl_cmd.html#flags) or in the 'vm.args' file of a release. It may also be started at runtime through the [net_kernel:start/2](https://www.erlang.org/doc/apps/kernel/net_kernel.html#start/2) function.
 
 ## Authentication, confidentiality, integrity
 
@@ -27,15 +27,15 @@ Because of the limitations of cookie-based authentication, and in order to ensur
 
 ## EPMD
 
-The [Erlang Port Mapper Daemon](http://erlang.org/doc/man/epmd.html) (EPMD) is a service that enables discovery of nodes by name. It may be launched directly through the `epmd` executable, or implicitly by the first node on a host (unless the `-start_epmd false` argument is passed to the VM). EPMD normally listens on port 4369.
+The [Erlang Port Mapper Daemon](https://www.erlang.org/doc/apps/erts/epmd_cmd.html) (EPMD) is a service that enables discovery of nodes by name. It may be launched directly through the `epmd` executable, or implicitly by the first node on a host (unless the `-start_epmd false` argument is passed to the VM). EPMD normally listens on port 4369.
 
 The [EPMD protocol](https://erlang.org/doc/apps/erts/erl_dist_protocol.html#epmd-protocol) allows unauthenticated clients to look up a node by name, as well as to retrieve the full list of known nodes. The response includes the TCP port on which the node's distribution protocol may be reached. Running EPMD on an untrusted network therefore exposes information about the distributed Erlang cluster(s) known at the host.
 
 ## Network isolation
 
-By default the distribution protocol binds to all available network interfaces. To minimize the risk of unauthorized access, consider setting up a dedicated intra-cluster network, for example using virtual network interfaces (in a cloud environment) or VLANs (on bare-metal). Use the `inet_dist_use_interface` [kernel configuration](https://erlang.org/doc/man/kernel_app.html#configuration) option to make sure the distribution protocol binds only to the IP address of that interface. The address must be specified in Erlang tuple syntax.
+By default the distribution protocol binds to all available network interfaces. To minimize the risk of unauthorized access, consider setting up a dedicated intra-cluster network, for example using virtual network interfaces (in a cloud environment) or VLANs (on bare-metal). Use the `inet_dist_use_interface` [kernel configuration](https://www.erlang.org/doc/apps/kernel/kernel_app.html#configuration) option to make sure the distribution protocol binds only to the IP address of that interface. The address must be specified in Erlang tuple syntax.
 
-EPMD also binds to all network interfaces by default. An IP address can be specified using the `-address` [command line argument](http://erlang.org/doc/man/epmd.html#regular-options) or the 'ERL_EPMD_ADDRESS' environment variable. The environment variable also takes effect when EPMD is started implicitly by the first node on a host. Note that EPMD always listens on the loopback interface (127.0.0.1 and ::1), regardless of the address specified.
+EPMD also binds to all network interfaces by default. An IP address can be specified using the `-address` [command line argument](https://www.erlang.org/doc/apps/erts/epmd_cmd.html#regular-options) or the 'ERL_EPMD_ADDRESS' environment variable. The environment variable also takes effect when EPMD is started implicitly by the first node on a host. Note that EPMD always listens on the loopback interface (127.0.0.1 and ::1), regardless of the address specified.
 
 ## Unclustered nodes
 
