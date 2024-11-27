@@ -20,7 +20,7 @@ Which one to choose may depend on personal preferences and operational constrain
 
 ### Release availability
 
-Some sources, in particular the OS native package repositories, may be stuck on an outdated Erlang/OTP release. Officially, bug fixes and security patches are made available for the latest release only. In practice, the last version of the previous major version tends to receive critical fixes for some time. Contact the Erlang/OTP team at Ericsson about the availability of commercial support for specific releases/versions, and the associated SLAs.
+Some sources, in particular the OS native package repositories, may be stuck on an outdated Erlang/OTP release. Officially, bug fixes and security patches are made available for the latest release only. In practice, the last patch version of the previous OTP release tends to receive critical fixes for some time. Contact the Erlang/OTP team at Ericsson about the availability of commercial support for specific releases/versions, and the associated SLAs.
 
 For more information, please refer to the [Support, Compatibility, Deprecations, and Removal](https://erlang.org/doc/system_principles/misc.html) chapter in the System Principles User's Guide, and consult the [OTP Versions Tree](http://erlang.org/download/otp_versions_tree.html).
 
