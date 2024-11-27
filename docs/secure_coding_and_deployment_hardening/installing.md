@@ -32,7 +32,7 @@ Some sources distribute patch packages as regular software updates, while others
 
 Many operating systems offer features such as Address Space Layout Randomization (ASLR) and stack canaries that help reduce the risk of exploitation of memory-related bugs. To fully leverage these features, the Erlang/OTP runtime system must be built with certain compiler and/or linker options.
 
-On Linux, use the `hardening-check` tool, available as part of the `devscripts` package on recent Debian/Ubuntu and Fedora/Red Hat distributions, to check the hardening status of the Erlang/OTP runtime system’s executables, including `beam.smp, `erlexec` and `epmd`.
+On Linux, use the `hardening-check` tool, available as part of the `devscripts` package on recent Debian/Ubuntu and Fedora/Red Hat distributions, to check the hardening status of the Erlang/OTP runtime system’s executables, including `beam.smp`, `erlexec` and `epmd`.
 
 When building for Linux from source, manually or through tools that handle the build for you such as `kerl` and `asdf`, it may be necessary to export the following environment variables prior to building (update with other flags, such as `-O`, as needed):
 
