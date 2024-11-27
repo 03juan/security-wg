@@ -23,7 +23,7 @@ The distribution protocol is started by assigning a node name to a VM at startup
 
 By default the distribution protocol is authenticated using ‘cookies’, as described in the [Erlang Reference Manual](https://erlang.org/doc/reference_manual/distributed.html#security). Cookies enable rudimentary access control, letting nodes decide which other nodes can join a cluster. The cookie value is not transmitted on the wire (a challenge/response mechanism is used), but no protections are in place against an active (man-in-the-middle) attack. Moreover, the default distribution protocol transmits all application data in the clear, using a variant of [External Term Format](http://erlang.org/doc/apps/erts/erl_ext_dist.html).
 
-Because of the limitations of cookie-based authentication, and in order to ensure the confidentiality and integrity of data exchanged between nodes, the use of TLS is recommended. The ‘ssl’ application’s User Guide includes a chapter on [Using TLS for Erlang Distribution](https://erlang.org/doc/apps/ssl/ssl_distribution.html). The `{verify, verify_peer}` option must be present in the client options, along with a `{cacertfile, Path}` pointing to the root CA certificate used to issue node certificates. The use of mutual TLS authentication, using a client certificate and  `{verify, verify_peer}` in the server options, is recommended.
+Because of the limitations of cookie-based authentication, and in order to ensure the confidentiality and integrity of data exchanged between nodes, the use of TLS is recommended. The `ssl` application’s User Guide includes a chapter on [Using TLS for Erlang Distribution](https://erlang.org/doc/apps/ssl/ssl_distribution.html). The `{verify, verify_peer}` option must be present in the client options, along with a `{cacertfile, Path}` pointing to the root CA certificate used to issue node certificates. The use of mutual TLS authentication, using a client certificate and  `{verify, verify_peer}` in the server options, is recommended.
 
 ## EPMD
 
@@ -35,7 +35,7 @@ The [EPMD protocol](https://erlang.org/doc/apps/erts/erl_dist_protocol.html#epmd
 
 By default the distribution protocol binds to all available network interfaces. To minimize the risk of unauthorized access, consider setting up a dedicated intra-cluster network, for example using virtual network interfaces (in a cloud environment) or VLANs (on bare-metal). Use the `inet_dist_use_interface` [kernel configuration](https://www.erlang.org/doc/apps/kernel/kernel_app.html#configuration) option to make sure the distribution protocol binds only to the IP address of that interface. The address must be specified in Erlang tuple syntax.
 
-EPMD also binds to all network interfaces by default. An IP address can be specified using the `-address` [command line argument](https://www.erlang.org/doc/apps/erts/epmd_cmd.html#regular-options) or the 'ERL_EPMD_ADDRESS' environment variable. The environment variable also takes effect when EPMD is started implicitly by the first node on a host. Note that EPMD always listens on the loopback interface (127.0.0.1 and ::1), regardless of the address specified.
+EPMD also binds to all network interfaces by default. An IP address can be specified using the `-address` [command line argument](https://www.erlang.org/doc/apps/erts/epmd_cmd.html#regular-options) or the `ERL_EPMD_ADDRESS` environment variable. The environment variable also takes effect when EPMD is started implicitly by the first node on a host. Note that EPMD always listens on the loopback interface (127.0.0.1 and ::1), regardless of the address specified.
 
 ## Unclustered nodes
 
@@ -45,7 +45,7 @@ Remote access to a node for monitoring and maintenance can be achieved over [an 
 ERL_EPMD_ADDRESS=127.0.0.1 erl -sname example -kernel inet_dist_use_interface '{127, 0, 0, 1}'
 ```
 
-When deploying a BEAM project that has no need for distribution whatsoever, ideally we should disable the distribution protocol completely. Unfortunately, since everything needed to run a distributed node is included in the ‘kernel’ application, this is not trivial. The distribution protocol can be *mostly* disabled by passing the `-proto_dist none` VM argument, which prevents node initialization because `none` is not a valid option.
+When deploying a BEAM project that has no need for distribution whatsoever, ideally we should disable the distribution protocol completely. Unfortunately, since everything needed to run a distributed node is included in the `kernel` application, this is not trivial. The distribution protocol can be *mostly* disabled by passing the `-proto_dist none` VM argument, which prevents node initialization because `none` is not a valid option.
 
 ## Architectural considerations
 
