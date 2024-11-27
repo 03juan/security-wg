@@ -17,7 +17,7 @@ next:
 
 The Erlang distribution protocol allows multiple VM instances to form a cluster, capable of running distributed applications. Processes can access resources across all nodes, transparently or through RPC, so if one node in a cluster is compromised, all nodes are. This also means the distribution protocol itself is extremely powerful, and it is absolutely essential to ensure that malicious users cannot gain access to it.
 
-The distribution protocol is started by assigning a node name to a VM at startup, either through [command line arguments](https://www.erlang.org/doc/apps/erts/erl_cmd.html#flags) or in the 'vm.args' file of a release. It may also be started at runtime through the [net_kernel:start/2](https://www.erlang.org/doc/apps/kernel/net_kernel.html#start/2) function.
+The distribution protocol is started by assigning a node name to a VM at startup, either through [command line arguments](https://www.erlang.org/doc/apps/erts/erl_cmd.html#flags) or in the `vm.args` file of a release. It may also be started at runtime through the [net_kernel:start/2](https://www.erlang.org/doc/apps/kernel/net_kernel.html#start/2) function.
 
 ## Authentication, confidentiality, integrity
 
